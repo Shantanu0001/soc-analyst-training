@@ -10,10 +10,6 @@
 | Data Sources | Sysmon EID 1, 8, 10 · Windows Security EID 4656 |
 | MITRE URL | https://attack.mitre.org/techniques/T1003/001/ |
 
-![MITRE ATT&CK T1003.001](../screenshots/12_mitre_t1003.png)
-*MITRE ATT&CK technique page for T1003.001 — the reference
-every detection should map back to.*
-
 ---
 
 ## What This Attack Is

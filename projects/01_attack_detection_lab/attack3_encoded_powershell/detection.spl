@@ -1,0 +1,17 @@
+// Detection: T1059.001 - Encoded PowerShell Execution
+// Author: Helix-D3t0x
+// Date: 2026-05-16
+// Severity: HIGH
+// Description: Detects PowerShell launched with -EncodedCommand or -enc flags.
+//              Common in malware, fileless attacks, C2 frameworks.
+//              Always decode and review the payload before closing.
+
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational"
+| rex field=_raw "<Data Name='CommandLine'>(?<CommandLine>[^<]+)"
+| rex field=_raw "<Data Name='Image'>(?<Image>[^<]+)"
+| search (Image="*powershell*") AND (CommandLine="*-enc*" OR CommandLine="*EncodedCommand*")
+| eval mitre_technique="T1059.001 - PowerShell"
+| eval risk="HIGH - Encoded command execution"
+| eval next_step="Decode Base64 payload and check for Download, IEX, or C2 patterns"
+| table _time host Image CommandLine mitre_technique risk next_step
+| sort -_time

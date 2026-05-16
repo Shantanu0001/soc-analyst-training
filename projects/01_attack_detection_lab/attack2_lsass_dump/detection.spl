@@ -1,0 +1,18 @@
+// Detection: T1003.001 - LSASS Memory Dump
+// Author: Helix-D3t0x
+// Date: 2026-05-16
+// Severity: CRITICAL
+// Description: Detects processes accessing or dumping LSASS memory.
+//              Covers procdump-style dumps and direct process access.
+//              Common in Mimikatz, credential theft, ransomware chains.
+
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational"
+| rex field=_raw "<Data Name='CommandLine'>(?<CommandLine>[^<]+)"
+| rex field=_raw "<Data Name='Image'>(?<Image>[^<]+)"
+| rex field=_raw "<Data Name='ParentImage'>(?<ParentImage>[^<]+)"
+| search CommandLine="*lsass*" OR CommandLine="*procdump*"
+| eval mitre_technique="T1003.001 - LSASS Memory Dump"
+| eval severity="CRITICAL"
+| eval analyst_note="Immediate escalation to L2. Check for lateral movement from this host."
+| table _time host Image CommandLine ParentImage mitre_technique severity analyst_note
+| sort -_time

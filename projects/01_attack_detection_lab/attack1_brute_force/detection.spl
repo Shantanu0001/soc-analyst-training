@@ -1,0 +1,15 @@
+// Detection: T1110.001 - Brute Force via net.exe
+// Author: Helix-D3t0x
+// Date: 2026-05-16
+// Severity: Medium
+// Description: Detects net.exe used to attempt SMB authentication, a common brute force technique against Windows shares
+
+index=main source="WinEventLog:Microsoft-Windows-Sysmon/Operational"
+| rex field=_raw "<Data Name='CommandLine'>(?<CommandLine>[^<]+)"
+| rex field=_raw "<Data Name='Image'>(?<Image>[^<]+)"
+| rex field=_raw "<Data Name='ParentImage'>(?<ParentImage>[^<]+)"
+| search CommandLine="*net use*"
+| eval mitre_technique="T1110.001 - Brute Force"
+| eval alert="Brute Force Attempt Detected"
+| table _time host Image CommandLine ParentImage mitre_technique alert
+| sort -_time

@@ -10,10 +10,6 @@
 | Data Sources | Sysmon EID 1 · PowerShell EID 4104 (Script Block Logging) |
 | MITRE URL | https://attack.mitre.org/techniques/T1059/001/ |
 
-![MITRE ATT&CK T1059.001](../screenshots/13_mitre_t1059.png)
-*MITRE ATT&CK technique page for T1059.001 — PowerShell abuse
-is one of the most common execution techniques in real intrusions.*
-
 ---
 
 ## What This Attack Is

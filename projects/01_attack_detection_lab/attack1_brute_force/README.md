@@ -132,10 +132,10 @@ What files did they access? What processes did they launch?
 
 ## Triage note documented in TheHive:
 
-> Atomic Red Team T1110.001 executed on MSEDGEWIN10 at [time].  
-> net.exe observed attempting SMB authentication via net use IPC$.  
-> No Active Directory present — authentication failed at infrastructure level. Process telemetry captured in Sysmon EID 1. Parent process was PowerShell indicating scripted/automated execution.  
-> Disposition: True Positive (lab simulation). Detection validated.
+- Atomic Red Team T1110.001 executed on MSEDGEWIN10 at [time].  
+- net.exe observed attempting SMB authentication via net use IPC$.  
+- No Active Directory present — authentication failed at infrastructure level. Process telemetry captured in Sysmon EID 1. Parent process was PowerShell indicating scripted/automated execution.  
+- Disposition: True Positive (lab simulation). Detection validated.
 
 ---
 
